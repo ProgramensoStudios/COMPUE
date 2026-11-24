@@ -2,7 +2,10 @@
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
     <title>Pasaporte de Misiones</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Rubik:wght@400;600;800&display=swap"
@@ -99,9 +102,11 @@
         </div>
         <p class="hint" id="hint"></p>
         <p class="count"><b id="n">0</b> de 5 sellos</p>
+        <div class="acts">
+          <button id="cal" type="button" hidden>Agregar a mi calendario</button>
+          <button id="edit" type="button" class="sec">Mis horarios</button>
+        </div>
         <div id="mine"></div>
-        <button id="cal" type="button" hidden>Agregar a mi calendario</button>
-        <button id="edit" type="button" class="sec">Mis horarios</button>
       </section>
     </main>
     <div id="toast" role="status"></div>

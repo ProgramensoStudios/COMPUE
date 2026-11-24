@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>QRs del pasaporte</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        background: #f4e8d4;
+        color: #3f7d1c;
+        margin: 0;
+        padding: 24px;
+      }
+      .sub {
+        color: #b00;
+        font-weight: 700;
+      }
+      .qrs {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+        gap: 16px;
+      }
+      .qr {
+        border: 3px solid #3f7d1c;
+        border-radius: 16px;
+        padding: 12px;
+        text-align: center;
+        background: #fff;
+        font-weight: 800;
+        font-size: 1.2rem;
+      }
+      .qr div {
+        display: flex;
+        justify-content: center;
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>QRs del evento</h1>
+    <div class="qrs" id="qrs"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+      const SITE = "https://conpue-fitness.netlify.app/"; // tu link de Netlify, con "/" al final
+      const KEYS = {
+        train: "train-8f3k2",
+        fuel: "fuel-q9x7a",
+        recover: "recover-m4d1z",
+        recharge: "recharge-p2w8c",
+        mindset: "mindset-t6j5h",
+      }; // iguales a Code.gs
+      const items = [
+        ["REGISTRO (lobby)", SITE],
+        ...Object.entries(KEYS).map(([s, k]) => [
+          s.toUpperCase(),
+          `${SITE}?s=${s}&k=${k}`,
+        ]),
+      ];
+      document.getElementById("qrs").innerHTML = items
+        .map(([l], i) => `<div class="qr">${l}<div id="q${i}"></div></div>`)
+        .join("");
+      items.forEach(
+        ([, u], i) =>
+          new QRCode(document.getElementById("q" + i), {
+            text: u,
+            width: 170,
+            height: 170,
+          }),
+      );
+    </script>
+  </body>
+</html>

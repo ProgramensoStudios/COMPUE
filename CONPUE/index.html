@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Pasaporte de Misiones</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Rubik:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <!-- Paso 1: datos -->
+      <section id="reg" hidden>
+        <h1>Pasaporte de misiones</h1>
+        <p class="sub">Regístrate y junta tus sellos en las 5 estaciones.</p>
+        <form id="f" autocomplete="on">
+          <input
+            name="name"
+            placeholder="Nombre"
+            required
+            maxlength="80"
+            autocomplete="name"
+          />
+          <input
+            name="age"
+            type="number"
+            inputmode="numeric"
+            min="5"
+            max="99"
+            placeholder="Edad"
+            required
+          />
+          <input
+            name="email"
+            type="email"
+            placeholder="Correo"
+            required
+            autocomplete="email"
+          />
+          <input
+            name="phone"
+            type="tel"
+            inputmode="tel"
+            placeholder="Número de contacto"
+            required
+            autocomplete="tel"
+          />
+          <label class="chk"
+            ><input type="checkbox" required /> Acepto el aviso de
+            privacidad</label
+          >
+          <button id="go">Siguiente: elegir horarios</button>
+        </form>
+      </section>
+
+      <!-- Paso 2: horarios -->
+      <section id="sched" hidden>
+        <h1>Elige tus horarios</h1>
+        <p class="sub">
+          Un horario por franja y cada actividad solo una vez por día. Es
+          opcional, puedes cambiarlo después.
+        </p>
+        <div id="slots"></div>
+        <button id="ok" type="button">Crear mi pasaporte</button>
+        <button id="back" type="button" class="sec">Volver</button>
+      </section>
+
+      <!-- Pasaporte -->
+      <section id="pass" hidden>
+        <p class="sub" id="who"></p>
+        <div class="stage" id="stage">
+          <div class="scale">
+            <div
+              class="book"
+              id="book"
+              role="button"
+              tabindex="0"
+              aria-label="Abrir o cerrar pasaporte"
+            >
+              <div class="page right" id="right"></div>
+              <div class="cover">
+                <div class="face front">
+                  <h2>Pasaporte<br />de misiones</h2>
+                  <b>Playbook House</b>
+                  <img
+                    class="art"
+                    src="img/unamas.png"
+                    alt=""
+                    onerror="this.remove()"
+                  />
+                </div>
+                <div class="face back page" id="left"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="hint" id="hint"></p>
+        <p class="count"><b id="n">0</b> de 5 sellos</p>
+        <div id="mine"></div>
+        <button id="cal" type="button" hidden>Agregar a mi calendario</button>
+        <button id="edit" type="button" class="sec">Mis horarios</button>
+      </section>
+    </main>
+    <div id="toast" role="status"></div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

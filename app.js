@@ -79,6 +79,7 @@ const slot = (k) => {
 const foot = (t, hit) => `<div class="foot ${hit ? "hit" : ""}">${t}</div>`;
 
 function render() {
+  $("#home").hidden = true;
   $("#reg").hidden = true;
   $("#sched").hidden = true;
   $("#pass").hidden = false;
@@ -101,7 +102,7 @@ function boom() {
   for (let i = 0; i < 40; i++) {
     const s = document.createElement("span");
     s.className = "cf";
-    s.style.cssText = `left:${Math.random() * 100}vw;background:${i % 2 ? "#d9a9ee" : "#3f7d1c"};animation-delay:${Math.random() * 0.5}s`;
+    s.style.cssText = `left:${Math.random() * 100}vw;background:${["#dc10aa", "#a24cd5", "#6193f9", "#992240"][i % 4]};animation-delay:${Math.random() * 0.5}s`;
     document.body.append(s);
     setTimeout(() => s.remove(), 2800);
   }
@@ -372,4 +373,11 @@ $("#f").addEventListener("submit", (e) => {
 if (me) {
   render();
   stampPending();
-} else $("#reg").hidden = false;
+} else $("#home").hidden = false;
+
+// ---- Inicio -> Registro ----
+$("#start").addEventListener("click", () => {
+  $("#home").hidden = true;
+  $("#reg").hidden = false;
+  scrollTo(0, 0);
+});

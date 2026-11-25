@@ -6,17 +6,51 @@
       name="viewport"
       content="width=device-width,initial-scale=1,viewport-fit=cover"
     />
-    <title>Pasaporte de Misiones</title>
+    <meta name="theme-color" content="#b5f3fe" />
+    <title>Pasaporte de Misiones · La ConPue</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Rubik:wght@400;600;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Bowlby+One&family=Rubik:wght@400;600;800;900&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main>
+      <!-- Inicio: logo + cartel -->
+      <section id="home" hidden>
+        <img
+          class="logo"
+          src="img/logo.png"
+          alt="La ConPue"
+          onerror="this.remove()"
+        />
+        <br />
+        <h1>Actividades<br /></h1>
+        <br />
+        <img
+          class="poster"
+          src="img/cartel.png"
+          alt="¡Del gaming al movimiento! Conoce a las voces del área fitness"
+          onerror="this.remove()"
+        />
+        <br />
+        <h1>Pasaporte<br />de misiones</h1>
+        <p class="sub">
+          Junta tus sellos en las 5 estaciones y gana recompensas.
+        </p>
+        <div class="cta">
+          <button id="start" type="button">Crear mi pasaporte</button>
+        </div>
+      </section>
+
       <!-- Paso 1: datos -->
       <section id="reg" hidden>
+        <img
+          class="mini"
+          src="img/logo.png"
+          alt="La ConPue"
+          onerror="this.remove()"
+        />
         <h1>Pasaporte de misiones</h1>
         <p class="sub">Regístrate y junta tus sellos en las 5 estaciones.</p>
         <form id="f" autocomplete="on">
@@ -61,6 +95,12 @@
 
       <!-- Paso 2: horarios -->
       <section id="sched" hidden>
+        <img
+          class="mini"
+          src="img/logo.png"
+          alt="La ConPue"
+          onerror="this.remove()"
+        />
         <h1>Elige tus horarios</h1>
         <p class="sub">
           Un horario por franja y cada actividad solo una vez por día. Es
@@ -73,6 +113,12 @@
 
       <!-- Pasaporte -->
       <section id="pass" hidden>
+        <img
+          class="mini"
+          src="img/logo.png"
+          alt="La ConPue"
+          onerror="this.remove()"
+        />
         <p class="sub" id="who"></p>
         <div class="stage" id="stage">
           <div class="scale">

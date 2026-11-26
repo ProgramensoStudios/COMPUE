@@ -156,15 +156,15 @@ async function stampPending() {
 }
 
 // ---- Horarios ----
-const fmt = (h) => {
-  const hh = +h.slice(0, 2);
-  return `${hh}:${h.slice(2)} – ${hh + 1}:00`;
-};
+const tm = (x) => `${+x.slice(0, 2)}:${x.slice(2)}`;
+// h = inicio ("1015"), e = fin ("1100"); si no hay fin, dura 1 hora
+const fmt = (h, e) =>
+  `${tm(h)} – ${tm(e || String(+h.slice(0, 2) + 1).padStart(2, "0") + "00")}`;
 const DAYN = { sab: "Sábado 28", dom: "Domingo 29" };
 const DAYORD = { sab: 0, dom: 1 };
 const nm = (id) => {
   const s = data.find((x) => x.id === id);
-  return s ? `${s.act} (${DAYN[s.d]} ${fmt(s.h)})` : id;
+  return s ? `${s.act} (${DAYN[s.d]} ${fmt(s.h, s.e)})` : id;
 };
 
 function renderPicker() {
@@ -184,7 +184,7 @@ function renderPicker() {
       .sort()
       .map(
         (h) =>
-          `<div class="blk"><h3>${fmt(h)}</h3><div class="opts">` +
+          `<div class="blk"><h3>${fmt(h, by[h][0].e)}</h3><div class="opts">` +
           by[h]
             .map((s) => {
               const on = sel[day + h] === s.id,
@@ -219,7 +219,7 @@ $("#slots").addEventListener("click", (e) => {
       ) {
         delete sel[o];
         toast(
-          `${act} solo se puede reservar una vez al día. Lo cambiamos a ${fmt(h)}.`,
+          `${act} solo se puede reservar una vez al día. Lo cambiamos a ${fmt(h, data.find((x) => x.id === id).e)}.`,
           4500,
         );
       }
@@ -314,7 +314,9 @@ async function loadMine() {
     $("#mine").innerHTML = mineList.length
       ? "<h3>Mis horarios</h3>" +
         mineList
-          .map((s) => `<p>${DAYN[s.d]} · ${fmt(s.h)} · <b>${s.act}</b></p>`)
+          .map(
+            (s) => `<p>${DAYN[s.d]} · ${fmt(s.h, s.e)} · <b>${s.act}</b></p>`,
+          )
           .join("")
       : "";
     $("#cal").hidden = !mineList.length;
@@ -333,7 +335,10 @@ $("#cal").addEventListener("click", () => {
     const hh = +s.h.slice(0, 2),
       mm = +s.h.slice(2);
     const start = new Date(Date.UTC(y, m, d, hh + TZ_OFFSET, mm));
-    const end = new Date(Date.UTC(y, m, d, hh + 1 + TZ_OFFSET, 0));
+    const e = s.e || String(hh + 1).padStart(2, "0") + "00";
+    const end = new Date(
+      Date.UTC(y, m, d, +e.slice(0, 2) + TZ_OFFSET, +e.slice(2)),
+    );
     return [
       "BEGIN:VEVENT",
       `UID:${me.id}-${s.id}@pasaporte`,
